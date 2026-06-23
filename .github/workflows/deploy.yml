@@ -1,0 +1,19 @@
+name: Deploy Nook Burgers to Local Hardware
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Deploy via Docker Compose
+        run: |
+          docker-compose down
+          docker-compose up --build -d
