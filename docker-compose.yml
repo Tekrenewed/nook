@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  nook-frontend:
+    build: .
+    ports:
+      - "3000:80"
+    restart: always
+    depends_on:
+      - firebase-emulators
+
+  firebase-emulators:
+    build: 
+      context: .
+      dockerfile: Dockerfile.firebase
+    ports:
+      - "4000:4000" # UI
+      - "5001:5001" # Functions
+      - "8080:8080" # Firestore
+      - "9099:9099" # Auth
+    volumes:
+      - ./functions:/app/functions
+    restart: always

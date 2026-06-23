@@ -1,0 +1,65 @@
+:root {
+  --wst-color-fill-background-primary: #000000;
+  --wst-color-fill-background-secondary: #1a1a1a;
+  --wst-color-text-primary: #ffffff;
+  --wst-color-text-secondary: #e0e0e0;
+  --wst-color-action: #F9C013;
+  --wst-button-color-fill-primary: #D9252B;
+  --wst-button-color-text-primary: #ffffff;
+  --wst-button-color-fill-primary-hover: #b91d23;
+  
+  --font-family-base: 'Inter', system-ui, sans-serif;
+  --border-radius-base: 8px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--wst-color-fill-background-primary);
+  color: var(--wst-color-text-primary);
+  font-family: var(--font-family-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.btn {
+  background-color: var(--wst-button-color-fill-primary);
+  color: var(--wst-button-color-text-primary);
+  border: none;
+  border-radius: var(--border-radius-base);
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: var(--wst-button-color-fill-primary-hover);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid var(--wst-color-action);
+  color: var(--wst-color-action);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 69, 0, 0.1);
+}
+
+.glass-panel {
+  background: rgba(30, 30, 30, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-base);
+}
