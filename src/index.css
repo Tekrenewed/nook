@@ -1,65 +1,64 @@
-:root {
-  --wst-color-fill-background-primary: #000000;
-  --wst-color-fill-background-secondary: #1a1a1a;
-  --wst-color-text-primary: #ffffff;
-  --wst-color-text-secondary: #e0e0e0;
-  --wst-color-action: #F9C013;
-  --wst-button-color-fill-primary: #D9252B;
-  --wst-button-color-text-primary: #ffffff;
-  --wst-button-color-fill-primary-hover: #b91d23;
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Inter:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
+
+@theme {
+  /* OKLCH Color Palette - Editorial & High-End */
+  --color-background: oklch(0.98 0 0); /* True off-white */
+  --color-surface: oklch(1 0 0); /* Pure white for contrast */
+  --color-primary: oklch(0.15 0 0); /* Deep rich ink, not pure black */
+  --color-secondary: oklch(0.45 0 0); /* Solid legible gray */
+  --color-accent: oklch(0.2 0 0); /* High-contrast accent */
   
-  --font-family-base: 'Inter', system-ui, sans-serif;
-  --border-radius-base: 8px;
+  --font-heading: "Outfit", "Helvetica Neue", sans-serif;
+  --font-body: "Inter", "Helvetica Neue", sans-serif;
+  --font-handwriting: "Caveat", cursive;
+  --font-signature: "Yellowtail", cursive;
+
+  --animate-fade-in: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slide-up: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-marquee: marquee 25s linear infinite;
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(32px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  background-color: var(--wst-color-fill-background-primary);
-  color: var(--wst-color-text-primary);
-  font-family: var(--font-family-base);
-  -webkit-font-smoothing: antialiased;
+/* Base styles */
+@layer base {
+  body {
+    @apply bg-background text-primary font-body antialiased selection:bg-primary selection:text-white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-black tracking-tight;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
 }
 
-* {
-  box-sizing: border-box;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
-.btn {
-  background-color: var(--wst-button-color-fill-primary);
-  color: var(--wst-button-color-text-primary);
-  border: none;
-  border-radius: var(--border-radius-base);
-  padding: 12px 24px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.btn:hover {
-  background-color: var(--wst-button-color-fill-primary-hover);
-}
-
-.btn-secondary {
-  background-color: transparent;
-  border: 1px solid var(--wst-color-action);
-  color: var(--wst-color-action);
-}
-
-.btn-secondary:hover {
-  background-color: rgba(255, 69, 0, 0.1);
-}
-
-.glass-panel {
-  background: rgba(30, 30, 30, 0.7);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--border-radius-base);
+/* Hide scrollbar for category tabs */
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
