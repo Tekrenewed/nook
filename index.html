@@ -8,6 +8,35 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <title>Nook Burgers</title>
+
+    <!-- AEO/SEO JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Nook Burgers",
+      "image": "https://nookburgers.co.uk/store.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "124 Streatham High Rd",
+        "addressLocality": "London",
+        "postalCode": "SW16 1BW",
+        "addressCountry": "UK"
+      },
+      "telephone": "+442071234567",
+      "servesCuisine": "Burgers",
+      "priceRange": "£",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          "opens": "12:00",
+          "closes": "22:00"
+        }
+      ],
+      "menu": "https://nookburgers.co.uk/menu"
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
