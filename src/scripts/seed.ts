@@ -1,17 +1,16 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, connectFirestoreEmulator } from 'firebase/firestore';
-import { MenuItem } from '../types/menu';
+import { createClient } from '@supabase/supabase-js';
+import type { MenuItem } from '../types/menu';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
-const firebaseConfig = {
-  apiKey: "demo-api-key",
-  projectId: "nook-burgers-local",
-};
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error('Missing Supabase environment variables');
+}
 
-// Use local emulator
-connectFirestoreEmulator(db, 'localhost', 8080);
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const menuItems: MenuItem[] = [
   { name: 'The Smash', description: 'Patty, Cheese, Pickles, House Sauce (Single/Double)', price: 8.99, ingredients: '100% Angus Beef, American Cheese, House Pickles, Secret Smash Sauce, Brioche Bun', category: 'Burgers', isDailyItem: false, isActive: true },
@@ -37,11 +36,10 @@ const menuItems: MenuItem[] = [
 async function seed() {
   console.log('Seeding database...');
   for (const item of menuItems) {
-    await addDoc(collection(db, 'menuItems'), item);
+    await supabase.from('menuItems').insert([item]);
     console.log(`Added: ${item.name}`);
   }
   console.log('Seeding complete!');
-  process.exit(0);
 }
 
 seed().catch(console.error);

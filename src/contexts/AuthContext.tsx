@@ -1,6 +1,6 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { User, onAuthStateChanged, signOut } from 'firebase/auth';
-import { auth } from '../firebase/config';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { type User } from '@supabase/supabase-js';
+import { supabase } from '../supabase/config';
 
 interface AuthContextType {
   currentUser: User | null;
@@ -23,14 +23,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setCurrentUser(session?.user ?? null);
       setLoading(false);
     });
-    return unsubscribe;
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setCurrentUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
-  const logout = () => signOut(auth);
+  const logout = async () => {
+    await supabase.auth.signOut();
+  };
 
   return (
     <AuthContext.Provider value={{ currentUser, loading, logout }}>

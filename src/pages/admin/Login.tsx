@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../firebase/config';
+import { supabase } from '../../supabase/config';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -12,7 +11,13 @@ export default function Login() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (signInError) throw signInError;
+      
       navigate('/admin/dashboard');
     } catch (err: any) {
       setError(err.message || 'Failed to login');

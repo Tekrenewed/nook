@@ -22,3 +22,24 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.vercel
+
+# Secrets & Environment Variables
+.env
+.env.*
+!.env.example
+secrets/
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+!tsconfig.node.json
+!tsconfig.app.json
+!firebase.json
+!skills-lock.json
+!*rc.json
+*service-account*.json
+gcp-keys/
+
+.env*

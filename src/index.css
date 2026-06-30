@@ -1,7 +1,7 @@
-@import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Inter:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Montserrat:wght@300;400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import "tailwindcss";
 
 @theme {
   /* OKLCH Color Palette - Editorial & High-End */
@@ -11,10 +11,10 @@
   --color-secondary: oklch(0.45 0 0); /* Solid legible gray */
   --color-accent: oklch(0.2 0 0); /* High-contrast accent */
   
-  --font-heading: "Outfit", "Helvetica Neue", sans-serif;
-  --font-body: "Inter", "Helvetica Neue", sans-serif;
+  --font-heading: "Poppins", "Helvetica Neue", sans-serif;
+  --font-body: "Montserrat", "Helvetica Neue", sans-serif;
   --font-handwriting: "Caveat", cursive;
-  --font-signature: "Yellowtail", cursive;
+  --font-signature: "Great Vibes", cursive;
 
   --animate-fade-in: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-slide-up: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -40,6 +40,19 @@
 @layer base {
   body {
     @apply bg-background text-primary font-body antialiased selection:bg-primary selection:text-white;
+    font-size: var(--text-p);
+  }
+
+  /* Mathematical Typography Scale (Perfect Fourth - 1.333 ratio) */
+  :root {
+    --text-base: 1rem;       /* 16px */
+    --text-p: 1rem;          /* 16px */
+    --text-h6: 1.333rem;     /* 21.33px */
+    --text-h5: 1.777rem;     /* 28.43px */
+    --text-h4: 2.369rem;     /* 37.90px */
+    --text-h3: 3.157rem;     /* 50.51px */
+    --text-h2: 4.209rem;     /* 67.34px */
+    --text-h1: 5.610rem;     /* 89.76px */
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -60,5 +73,35 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  .bg-pattern-dots {
+    background-image: radial-gradient(rgba(0, 0, 0, 0.06) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+    background-position: center center;
+  }
+  
+  .bg-pattern-graph {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-position: center center;
+  }
+
+  .svg-animate-draw path,
+  .svg-animate-draw circle,
+  .svg-animate-draw rect,
+  .svg-animate-draw line {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .group:hover .svg-animate-draw path,
+  .group:hover .svg-animate-draw circle,
+  .group:hover .svg-animate-draw rect,
+  .group:hover .svg-animate-draw line {
+    stroke-dashoffset: 0;
   }
 }

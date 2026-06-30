@@ -1,5 +1,6 @@
 export interface MenuItem {
   id?: string;
+  siteId?: string; // e.g. 'global', 'streatham', 'slough'
   name: string;
   description: string;
   price: number;
@@ -7,6 +8,8 @@ export interface MenuItem {
   category: 'Burgers' | 'Sides' | 'Desserts' | 'Shakes' | 'Drinks';
   isDailyItem: boolean;
   isActive: boolean;
+  imageUrl?: string;
+  galleryUrls?: string[];
 }
 
 export interface OrderItem {

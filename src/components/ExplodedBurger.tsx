@@ -1,7 +1,13 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ExplodedBurger() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const layersRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const layers = [
     { src: '/layer_bun_top.png', name: 'Toasted brioche bun', desc: 'Soft, buttery, perfectly toasted.', zIndex: 50 },
@@ -11,62 +17,101 @@ export default function ExplodedBurger() {
     { src: '/layer_bun_bottom.png', name: 'Toasted brioche bun', desc: 'The sturdy foundation.', zIndex: 10 },
   ];
 
-  return (
-    <section className="min-h-screen py-24 w-full bg-surface text-primary flex items-center justify-center relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 w-full flex flex-col lg:flex-row items-center justify-between">
-        
-        {/* Left Side: Static Title & Intro */}
-        <div className="w-full lg:w-1/3 z-50 mb-16 lg:mb-0 text-center lg:text-left">
-          <h2 className="font-heading font-extrabold text-4xl md:text-5xl lg:text-6xl mb-6 tracking-tight">
-            The Anatomy of Perfect
-          </h2>
-          <p className="text-secondary font-light text-lg lg:text-xl leading-relaxed">
-            Hover over the meticulously selected ingredients that make up the brand's true signature.
-          </p>
-        </div>
+  useEffect(() => {
+    if (!containerRef.current) return;
 
-        {/* Right Side: The Interactive Stacked Burger */}
-        <div className="w-full lg:w-2/3 flex flex-col items-center justify-center relative">
+    const ctx = gsap.context(() => {
+      // Open offsets for each layer to explode them outwards
+      // 5 layers: index 0 to 4. Center is 2.
+      const openOffsets = [-160, -80, 0, 80, 160];
+
+      layersRef.current.forEach((el, idx) => {
+        if (!el) return;
+        
+        // Find the text wrapper within the layer
+        const textWrapper = el.querySelector('.burger-text-wrapper');
+
+        // Setup the initial state and animation for the whole layer row
+        gsap.fromTo(el, 
+          { y: 0 }, // Starts closed (at natural overlapping position)
+          { 
+            y: openOffsets[idx], // Explodes outwards
+            ease: "none",
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 80%", // Start expanding when container hits 80% of viewport
+              end: "center center", // Fully expanded at center
+              scrub: 1, // Smooth scrubbing
+            }
+          }
+        );
+
+        // Fade in text and line as it expands
+        if (textWrapper) {
+          gsap.fromTo(textWrapper,
+            { opacity: 0, x: -20 },
+            {
+              opacity: 1,
+              x: 0,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top 70%", 
+                end: "center center",
+                scrub: 1,
+              }
+            }
+          );
+        }
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+        <div ref={containerRef} className="w-full flex flex-col items-center justify-center relative py-12 lg:py-24">
           {layers.map((layer, idx) => {
-            // Determine if this specific layer should be dimmed
             const isDimmed = hoveredIdx !== null && hoveredIdx !== idx;
-            // Determine if this specific layer is actively hovered
             const isActive = hoveredIdx === idx;
 
             return (
               <div 
                 key={idx}
-                className="w-full flex items-center justify-center transition-all duration-300 py-2 md:py-4 cursor-crosshair group"
+                ref={el => { layersRef.current[idx] = el; }}
+                className={`w-full flex items-center justify-center transition-all cursor-crosshair group mix-blend-multiply ${
+                  idx !== 0 ? '-mt-16 md:-mt-24 lg:-mt-32' : ''
+                }`}
                 style={{ zIndex: layer.zIndex }}
                 onMouseEnter={() => setHoveredIdx(idx)}
                 onMouseLeave={() => setHoveredIdx(null)}
               >
                 {/* Image Column */}
                 <div 
-                  className={`w-1/2 flex justify-end relative transition-all duration-500 ease-out ${
+                  className={`w-1/2 flex justify-end relative transition-all duration-300 ease-out ${
                     isDimmed ? 'opacity-20 scale-95' : 'opacity-100 scale-100'
-                  } ${isActive ? 'drop-shadow-2xl' : 'drop-shadow-md'}`}
+                  }`}
                 >
                   <img 
                     src={layer.src} 
                     alt={layer.name} 
-                    className="h-24 md:h-32 lg:h-40 w-auto object-contain mix-blend-multiply contrast-[1.15] brightness-[1.05]" 
+                    className="burger-img h-24 md:h-32 lg:h-40 w-auto object-contain contrast-[1.15] brightness-[1.05]" 
                   />
                 </div>
 
                 {/* Connecting Line & Text Column */}
-                <div className="w-1/2 flex items-center pl-4 md:pl-8">
+                <div className="burger-text-wrapper w-1/2 flex items-center pl-4 md:pl-8">
                   {/* The Connecting Line */}
                   <div 
-                    className={`h-[1px] bg-primary/20 mr-4 transition-all duration-500 ease-out hidden md:block ${
-                      isActive ? 'w-16 md:w-24 bg-primary/60' : 'w-8 md:w-12'
+                    className={`h-[1px] bg-primary/40 mr-4 transition-all duration-500 ease-out hidden md:block ${
+                      isActive ? 'w-16 md:w-32 bg-primary' : 'w-12 md:w-20'
                     } ${isDimmed ? 'opacity-20' : 'opacity-100'}`}
                   ></div>
-                  
+
                   {/* The Typography */}
                   <div 
-                    className={`transition-all duration-500 ease-out ${
-                      isDimmed ? 'opacity-30 translate-x-0' : 'opacity-100'
+                    className={`burger-text transition-all duration-300 ease-out ${
+                      isDimmed ? 'opacity-30' : 'opacity-100'
                     } ${isActive ? 'translate-x-4' : 'translate-x-0'}`}
                   >
                     <h4 className="font-bold text-lg md:text-2xl tracking-tight mb-1">{layer.name}</h4>
@@ -79,8 +124,5 @@ export default function ExplodedBurger() {
             );
           })}
         </div>
-
-      </div>
-    </section>
   );
 }
