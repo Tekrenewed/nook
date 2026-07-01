@@ -10,11 +10,11 @@ export default function ExplodedBurger() {
   const layersRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const layers = [
-    { src: '/layer_bun_top.png', name: 'Toasted brioche bun', desc: 'Soft, buttery, perfectly toasted.', zIndex: 50 },
+    { src: '/layer_bun_top.png', name: 'Toasted potato bun', desc: 'Soft, buttery, perfectly toasted.', zIndex: 50 },
     { src: '/layer_sauce.png', name: 'Homemade Nook sauce', desc: 'Our signature tangy & savory blend.', zIndex: 40 },
     { src: '/layer_cheese.png', name: 'Top-tier cheese', desc: 'Melted to perfection.', zIndex: 30 },
     { src: '/layer_patty.png', name: 'Premium UK-sourced beef', desc: 'Smashed thin for a perfect crust.', zIndex: 20 },
-    { src: '/layer_bun_bottom.png', name: 'Toasted brioche bun', desc: 'The sturdy foundation.', zIndex: 10 },
+    { src: '/layer_bun_bottom.png', name: 'Toasted potato bun', desc: 'The sturdy foundation.', zIndex: 10 },
   ];
 
   useEffect(() => {

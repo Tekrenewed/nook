@@ -99,7 +99,7 @@ export default function Home() {
               OUR MENU
             </h2>
             <p className="text-lg font-medium text-secondary leading-relaxed mb-4">
-              The Smash burgers are made with toasted brioche buns, premium UK-sourced meats, top-tier cheese and a secret homemade sauce, the brand's true signature.
+              The Smash burgers are made with toasted potato buns, premium UK-sourced meats, top-tier cheese and a secret homemade sauce, the brand's true signature.
             </p>
             <p className="text-lg font-medium text-secondary leading-relaxed mb-8">
               Each ingredient is meticulously selected to ensure a delicious experience.

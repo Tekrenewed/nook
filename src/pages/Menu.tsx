@@ -17,11 +17,11 @@ export default function Menu() {
   const navigate = useNavigate();
 
   const fallbackMenuItems: MenuItem[] = [
-    { id: '1', name: 'The Smash', description: 'Patty, Cheese, Pickles, House Sauce (Single/Double)', price: 8.99, ingredients: '100% Angus Beef, American Cheese, House Pickles, Secret Smash Sauce, Brioche Bun', category: 'Burgers', isDailyItem: false, isActive: true },
+    { id: '1', name: 'The Smash', description: 'Patty, Cheese, Pickles, House Sauce (Single/Double)', price: 8.99, ingredients: '100% Angus Beef, American Cheese, House Pickles, Secret Smash Sauce, Potato Bun', category: 'Burgers', isDailyItem: false, isActive: true },
     { id: '2', name: 'Truffle Smash', description: 'Patty, Cheese, Truffle Mayo, Crispy Onions (Single/Double)', price: 9.99, category: 'Burgers', isDailyItem: false, isActive: true },
     { id: '3', name: 'Stack\'d', description: 'Triple Patty, Triple Cheese, House Sauce, Pickles', price: 10.99, category: 'Burgers', isDailyItem: false, isActive: true },
     { id: '7', name: 'Cluck\'d', description: 'Fried Fillet, Cheese, House Sauce', price: 8.99, category: 'Burgers', isDailyItem: false, isActive: true },
-    { id: '5', name: 'Beyond Smash', description: 'Vegan Patty, Vegan Cheese, House Sauce', price: 9.99, ingredients: 'Beyond Meat Patty, Vegan Cheddar, House Sauce, Vegan Brioche Bun', category: 'Burgers', isDailyItem: false, isActive: true },
+    { id: '5', name: 'Beyond Smash', description: 'Vegan Patty, Vegan Cheese, House Sauce', price: 9.99, ingredients: 'Beyond Meat Patty, Vegan Cheddar, House Sauce, Vegan Potato Bun', category: 'Burgers', isDailyItem: false, isActive: true },
     { id: '6', name: 'Hot smash', description: 'single patty, jelepenos, pickles, hot sauce', price: 8.99, category: 'Burgers', isDailyItem: false, isActive: true },
     { id: '8', name: 'Fries', description: 'Plain/Cheesy/Truffle', price: 3.99, category: 'Sides', isDailyItem: false, isActive: true },
     { id: '9', name: 'Loaded Fries', description: 'Beef Patty/Chicken/vegan', price: 5.99, category: 'Sides', isDailyItem: false, isActive: true },

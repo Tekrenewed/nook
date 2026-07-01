@@ -13,11 +13,11 @@ if (!supabaseUrl || !supabaseKey) {
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const menuItems: MenuItem[] = [
-  { name: 'The Smash', description: 'Patty, Cheese, Pickles, House Sauce (Single/Double)', price: 8.99, ingredients: '100% Angus Beef, American Cheese, House Pickles, Secret Smash Sauce, Brioche Bun', category: 'Burgers', isDailyItem: false, isActive: true },
-  { name: 'Truffle Smash', description: 'Patty, Cheese, Truffle Mayo, Crispy Onions (Single/Double)', price: 9.99, ingredients: '100% Angus Beef, Swiss Cheese, Black Truffle Mayo, Crispy Shallots, Brioche Bun', category: 'Burgers', isDailyItem: false, isActive: true },
+  { name: 'The Smash', description: 'Patty, Cheese, Pickles, House Sauce (Single/Double)', price: 8.99, ingredients: '100% Angus Beef, American Cheese, House Pickles, Secret Smash Sauce, Potato Bun', category: 'Burgers', isDailyItem: false, isActive: true },
+  { name: 'Truffle Smash', description: 'Patty, Cheese, Truffle Mayo, Crispy Onions (Single/Double)', price: 9.99, ingredients: '100% Angus Beef, Swiss Cheese, Black Truffle Mayo, Crispy Shallots, Potato Bun', category: 'Burgers', isDailyItem: false, isActive: true },
   { name: 'Stack\'d', description: 'Triple Patty, Triple Cheese, House Sauce (pickles)', price: 10.99, category: 'Burgers', isDailyItem: false, isActive: true },
   { name: 'Bacon Smash', description: 'Double patty, crispy bacon, pickles, house sauce', price: 10.99, category: 'Burgers', isDailyItem: false, isActive: true },
-  { name: 'Beyond Smash', description: 'Vegan Patty, Vegan Cheese, House Sauce', price: 9.99, ingredients: 'Beyond Meat Patty, Vegan Cheddar, House Sauce, Vegan Brioche Bun', category: 'Burgers', isDailyItem: false, isActive: true },
+  { name: 'Beyond Smash', description: 'Vegan Patty, Vegan Cheese, House Sauce', price: 9.99, ingredients: 'Beyond Meat Patty, Vegan Cheddar, House Sauce, Vegan Potato Bun', category: 'Burgers', isDailyItem: false, isActive: true },
   { name: 'Hot Smash', description: 'Single patty, jelepenos, pickles, hot sauce', price: 8.99, category: 'Burgers', isDailyItem: false, isActive: true },
   { name: 'Cluck\'d', description: 'Fried Fillet, Cheese, House Sauce', price: 8.99, category: 'Burgers', isDailyItem: false, isActive: true },
   { name: 'Fries (Plain/Cheesy/Truffle)', description: '', price: 3.99, category: 'Sides', isDailyItem: false, isActive: true },
